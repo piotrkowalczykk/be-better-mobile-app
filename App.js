@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import HomeScreen from './screens/HomeScreen';
+import { getData, storeData } from './components/StorageHelper';
+import WelcomeScreen from './screens/WelcomeScreen';
+
+const HAS_LAUNCHED = "HAS_LAUNCHED";
 
 export default function App() {
+
+  const [hasLanuched, setHasLaaunched] = useState(false);
+
+  useEffect(() => {
+    const getStatus = async () => {
+        const hasLanuched = await getData(HAS_LAUNCHED)
+        if (hasLanuched) {
+          setHasLaaunched(true);
+        } else {
+          await storeData(HAS_LAUNCHED, "true");
+        }
+    }
+    
+    getStatus().catch((error) => {console.log(error)});
+    
+  }, [])
+
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      {hasLanuched ? <HomeScreen /> : <WelcomeScreen />}
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
