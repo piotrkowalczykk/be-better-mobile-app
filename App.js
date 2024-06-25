@@ -13,9 +13,9 @@ export default function App() {
     const getStatus = async () => {
         const hasLanuched = await getData(HAS_LAUNCHED)
         if (hasLanuched) {
-          setHasLaaunched(true);
+          setHasLaaunched(false); // test true
         } else {
-          await storeData(HAS_LAUNCHED, "true");
+          await storeData(HAS_LAUNCHED, "false"); // test true
         }
     }
     
