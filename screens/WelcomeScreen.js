@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     img:{
         width: wp('70%'),
         resizeMode: 'contain',
-        margin: -90
+        margin: -100
     },
     paragraph: {
         fontSize: wp('5%'),
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         width: wp('80%')
     },
     btn: {
-        marginTop: 50,
+        marginTop: 60,
         backgroundColor: '#f8df08',
         width: wp('60%'),
         justifyContent: 'center',
