@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
-import HomeScreen from './screens/HomeScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { getData, storeData } from './components/StorageHelper';
 import WelcomeScreen from './screens/WelcomeScreen';
+import HomeScreen from './screens/HomeScreen';
+import SettingsScreen from './screens/SettingsScreen';
+
 
 const HAS_LAUNCHED = "HAS_LAUNCHED";
+const Stack = createNativeStackNavigator();
 
 export default function App() {
 
@@ -25,9 +30,13 @@ export default function App() {
 
 
   return (
-    <>
-      {hasLanuched ? <HomeScreen /> : <WelcomeScreen />}
-    </>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName={hasLanuched ? "HomeScreen" : "WelcomeScreen"}>
+        <Stack.Screen name = "WelcomeScreen" component={WelcomeScreen} options={{headerShown: false}}/>
+        <Stack.Screen name = "SettingsScreen" component={SettingsScreen} options={{headerShown: false}}/>
+        <Stack.Screen name = "HomeScreen" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
