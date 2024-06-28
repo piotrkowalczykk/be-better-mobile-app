@@ -12,12 +12,14 @@
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
-    "expo": "~51.0.14",
+    "expo": "~51.0.16",
+    "expo-image-picker": "~15.0.6",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
     "react-native": "0.74.2",
+    "react-native-image-picker": "^7.1.2",
     "react-native-responsive-screen": "^1.4.2",
-    "expo-image-picker": "~15.0.5"
+    "react-native-sqlite-storage": "^6.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

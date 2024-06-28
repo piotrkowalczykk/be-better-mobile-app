@@ -5,6 +5,7 @@ import { getData, storeData } from './components/StorageHelper';
 import WelcomeScreen from './screens/WelcomeScreen';
 import HomeScreen from './screens/HomeScreen';
 import SettingsScreen from './screens/SettingsScreen';
+import {AppRegistry} from 'react-native';
 
 
 const HAS_LAUNCHED = "HAS_LAUNCHED";
