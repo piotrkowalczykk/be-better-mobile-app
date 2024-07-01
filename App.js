@@ -35,7 +35,7 @@ export default function App() {
       <Stack.Navigator initialRouteName={hasLanuched ? "HomeScreen" : "WelcomeScreen"}>
         <Stack.Screen name = "WelcomeScreen" component={WelcomeScreen} options={{headerShown: false}}/>
         <Stack.Screen name = "SettingsScreen" component={SettingsScreen} options={{headerShown: false}}/>
-        <Stack.Screen name = "HomeScreen" component={HomeScreen} />
+        <Stack.Screen name = "HomeScreen" component={HomeScreen} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
