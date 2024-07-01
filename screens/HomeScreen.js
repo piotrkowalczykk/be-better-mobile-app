@@ -2,6 +2,8 @@ import { Text, SafeAreaView, StyleSheet, Image} from 'react-native';
 import { getData } from '../components/StorageHelper';
 import { useEffect, useState } from 'react';
 import DefaultImage from '../assets/user.png'
+import DateNavigator from '../components/DateNavigator';
+
 
 export default function HomeScreen(){
 
@@ -16,7 +18,6 @@ export default function HomeScreen(){
                 const storedUserAvatar = await getData('USERAVATAR')
                 setUsername(storedUsername);
                 setUserAvatar(storedUserAvatar);
-                console.log(userAvatar)
             } catch (error) {
                 console.log(error)
             }
@@ -27,6 +28,7 @@ export default function HomeScreen(){
 
     return (
         <SafeAreaView style={styles.container}>
+            <DateNavigator />
             <Image source={{uri: userAvatar}} style={styles.avatar} />
             <Text>{username}</Text>
         </SafeAreaView>
