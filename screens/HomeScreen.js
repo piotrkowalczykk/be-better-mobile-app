@@ -1,8 +1,9 @@
-import { Text, SafeAreaView, StyleSheet, Image} from 'react-native';
+import { Text, SafeAreaView, StyleSheet, Image, View} from 'react-native';
 import { getData } from '../components/StorageHelper';
 import { useEffect, useState } from 'react';
 import DefaultImage from '../assets/user.png'
 import DateNavigator from '../components/DateNavigator';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 
 export default function HomeScreen(){
@@ -28,22 +29,45 @@ export default function HomeScreen(){
 
     return (
         <SafeAreaView style={styles.container}>
-            <DateNavigator />
-            <Image source={{uri: userAvatar}} style={styles.avatar} />
-            <Text>{username}</Text>
+            <View style={styles.calendar}>
+                <DateNavigator />
+            </View>
+            <Image style={styles.img} source={require('../assets/test.png')} />
+            {/* <Image source={{uri: userAvatar}} style={styles.avatar} />
+            <Text>{username}</Text> */}
+            <View style={styles.tasksContainer}>
+                <Text>,,,</Text>
+            </View>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
+        overflow: 'hidden',
+        margin: 0,
+        backgroundColor: '#211e1e',
         flex: 1,
-        backgorundColor: 'yellow',
-        justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     avatar: {
         height: 100,
         width: 100
+    },
+    img: {
+        resizeMode: 'contain',
+        margin: 0,
+        width: '100%',
+        height: 248,
+        backgroundColor: '#2c2626',
+        aspectRatio: 2/1
+
+    },
+    tasksContainer: {
+        margin: 0,
+        flex: 1,
+        width: wp('100%'),
+        backgroundColor: '#2c2626',
+        alignItems: 'center'
     }
 })

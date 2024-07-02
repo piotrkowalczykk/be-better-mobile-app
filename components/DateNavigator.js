@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import { SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function DateNavigator(){
@@ -27,27 +27,50 @@ export default function DateNavigator(){
 
 
     return (
-    <View style={styles.container}>
-        <Text style={styles.day}>{dayOfWeek}</Text>
-        <Text style={styles.date}>{formattedDate}</Text>
+    <SafeAreaView style={styles.container}>
         <TouchableOpacity onPress={handlePrevDay}>
-            <Text>{"<"}</Text>
+            <Text style={styles.arrow}>{"<"}</Text>
         </TouchableOpacity>
+        <View style={styles.innerContainer}>
+            <Text style={styles.day}>{dayOfWeek}</Text>
+            <Text style={styles.date}>{formattedDate}</Text>
+        </View>
         <TouchableOpacity onPress={handleNextDay}>
-            <Text>{">"}</Text>
+            <Text style={styles.arrow}>{">"}</Text>
         </TouchableOpacity>
-    </View>
+    </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
+        width: wp('100%'),
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        paddingTop: StatusBar.currentHeight,
+        backgroundColor: '#221c1c'
+    },
+    innerContainer: {
+        padding: wp('2%'),
+        paddingBottom: 0,
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'pink',
-        padding: wp('2%')
     },
     day: {
         fontSize: wp('8%'),
+        color: '#d2d9d8'
+    },
+    date: {
+        padding: 0,
+        color: '#d2d9d8'
+    },
+    arrow: {
+        color: 'white',
+        fontSize: wp('8%'),
+        padding: wp('4%'),
+        paddingTop: wp('6%'),
+        paddingBottom: 0,
     }
 })
