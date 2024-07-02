@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         zIndex: 1
     },
     buttonText: {
-        fontSize: wp('5%'),
+        fontSize: wp('10%'),
         color: 'white'
     },
     btnText: {
