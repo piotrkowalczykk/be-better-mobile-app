@@ -5,7 +5,6 @@ import DefaultImage from '../assets/user.png'
 import DateNavigator from '../components/DateNavigator';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-
 export default function HomeScreen(){
 
     const DEFAULT_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
     container: {
         overflow: 'hidden',
         margin: 0,
-        backgroundColor: '#211e1e',
+        backgroundColor: '#221c1c',
         flex: 1,
         alignItems: 'center',
     },

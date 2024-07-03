@@ -29,7 +29,7 @@ export default function SettingsScreen({navigation}){
         if (name.trim() !== "" && name.length <= 12){
             storeData('USERNAME', name.toString());
             storeData('USERAVATAR', image.toString());
-            navigation.navigate('HomeScreen');
+            navigation.navigate('BottomNavigation');
         } else {
             Alert.alert('Invalid name', 'Name cannot be empty and can have a maximum of 12 characters')
         }
