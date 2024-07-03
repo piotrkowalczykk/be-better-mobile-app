@@ -3,10 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { getData, storeData } from './components/StorageHelper';
 import WelcomeScreen from './screens/WelcomeScreen';
-import HomeScreen from './screens/HomeScreen';
+import BottomNavigation from './components/BottomNavigation';
 import SettingsScreen from './screens/SettingsScreen';
-import {AppRegistry} from 'react-native';
-
 
 const HAS_LAUNCHED = "HAS_LAUNCHED";
 const Stack = createNativeStackNavigator();
@@ -32,10 +30,10 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={hasLanuched ? "HomeScreen" : "WelcomeScreen"}>
+      <Stack.Navigator initialRouteName={hasLanuched ? "BottomNavigation" : "WelcomeScreen"}>
         <Stack.Screen name = "WelcomeScreen" component={WelcomeScreen} options={{headerShown: false}}/>
         <Stack.Screen name = "SettingsScreen" component={SettingsScreen} options={{headerShown: false}}/>
-        <Stack.Screen name = "HomeScreen" component={HomeScreen} options={{headerShown: false}}/>
+        <Stack.Screen name = "BottomNavigation" component={BottomNavigation} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
