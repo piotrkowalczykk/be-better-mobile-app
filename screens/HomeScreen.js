@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import DefaultImage from '../assets/user.png'
 import DateNavigator from '../components/DateNavigator';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { createTable, getAllRows, insertData, openDatabase } from '../components/Database';
 
 export default function HomeScreen(){
 
@@ -11,20 +12,28 @@ export default function HomeScreen(){
     const [username, setUsername] = useState('');
     const [userAvatar, setUserAvatar] = useState(DEFAULT_IMAGE)
 
-    useEffect(() => {
-        const getUserData = async () => {
-            try {
-                const storedUsername = await getData('USERNAME');
-                const storedUserAvatar = await getData('USERAVATAR')
-                setUsername(storedUsername);
-                setUserAvatar(storedUserAvatar);
-            } catch (error) {
-                console.log(error)
-            }
+    const getUserData = async () => {
+        try {
+            const storedUsername = await getData('USERNAME');
+            const storedUserAvatar = await getData('USERAVATAR')
+            setUsername(storedUsername);
+            setUserAvatar(storedUserAvatar);
+        } catch (error) {
+            console.log(error)
         }
-        getUserData();
-    }, [])
+    }
 
+    const startDb = async () => {
+        const db = await openDatabase();
+        await createTable(db);
+        const rows = await getAllRows(db);
+    }
+
+
+    useEffect(() => {
+        getUserData();
+        startDb();
+    }, [])
 
     return (
         <SafeAreaView style={styles.container}>

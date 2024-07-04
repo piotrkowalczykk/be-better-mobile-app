@@ -21,7 +21,8 @@
     "react-native-image-picker": "^7.1.2",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-responsive-screen": "^1.4.2",
-    "react-native-sqlite-storage": "^6.0.1"
+    "react-native-sqlite-storage": "^6.0.1",
+    "expo-sqlite": "~14.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
