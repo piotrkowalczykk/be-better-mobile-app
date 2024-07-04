@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TouchableOpacity, SafeAreaView, Text, StyleSheet, View, Image, ImageBackground, TextInput, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Button, Alert } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { storeData } from "../components/StorageHelper";
+import { storeData, getData } from "../components/StorageHelper";
 import * as ImagePicker from 'expo-image-picker';
 import DefaultImage from '../assets/user.png'
 
 export default function SettingsScreen({navigation}){
 
     const DEFAULT_IMAGE = Image.resolveAssetSource(DefaultImage).uri;
-    const [name, setName] = useState('');
-    const [image, setImage] = useState(DEFAULT_IMAGE);
+    const [username, setUsername] = useState('');
+    const [userAvatar, setUserAvatar] = useState(DEFAULT_IMAGE)
 
     const selectAvatar = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -21,19 +21,33 @@ export default function SettingsScreen({navigation}){
             height: 200
         })
         if (!result.canceled){
-            setImage(result.assets[0].uri);
+            setUserAvatar(result.assets[0].uri);
         }
     }
 
     const saveHandler = () => {
-        if (name.trim() !== "" && name.length <= 12){
-            storeData('USERNAME', name.toString());
-            storeData('USERAVATAR', image.toString());
+        if (username.trim() !== "" && username.length <= 12){
+            storeData('USERNAME', username.toString());
+            storeData('USERAVATAR', userAvatar.toString());
             navigation.navigate('BottomNavigation');
         } else {
             Alert.alert('Invalid name', 'Name cannot be empty and can have a maximum of 12 characters')
         }
     }
+
+    useEffect(() => {
+        const getUserData = async () => {
+            try {
+                const storedUsername = await getData('USERNAME');
+                const storedUserAvatar = await getData('USERAVATAR')
+                setUsername(storedUsername);
+                setUserAvatar(storedUserAvatar);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getUserData();
+    }, [])
 
     return(
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{flex: 1}} enabled>
@@ -41,15 +55,15 @@ export default function SettingsScreen({navigation}){
         <SafeAreaView style={styles.container}>
             <View style={styles.imgContainer}>
                 <View style={styles.innerImgContainer}>
-                <ImageBackground style={styles.userAvatar} resizeMode='contain' source={{uri: image}} />
+                <ImageBackground style={styles.userAvatar} resizeMode='contain' source={{uri: userAvatar}} />
                 </View>
             <TouchableOpacity style={styles.selectAvatarBtn} onPress={selectAvatar}>
                 <Text style={styles.buttonText}>+</Text>
             </TouchableOpacity>
             </View>
             <View style={styles.usernameContainer}>
-                <Text style={styles.username}>{name}</Text>
-                <TextInput style={styles.input} placeholder="Enter your name" placeholderTextColor="#6e6e6e" onChangeText={(val) => setName(val)} maxLength={12}></TextInput>
+                <Text style={styles.username}>{username}</Text>
+                <TextInput style={styles.input} placeholder="Enter your name" placeholderTextColor="#6e6e6e" onChangeText={(val) => setUsername(val)} maxLength={12}></TextInput>
             </View>
             <TouchableOpacity style={styles.btn} onPress={() => saveHandler()}>
                 <Text style={styles.btnText}>SAVE</Text>
@@ -63,7 +77,7 @@ export default function SettingsScreen({navigation}){
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#211e1e',
+        backgroundColor: '#2c2626',
         justifyContent: 'center',
         alignItems: 'center'
     },
